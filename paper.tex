@@ -1,0 +1,268 @@
+\documentclass[10pt,twocolumn]{article}
+
+\input{preamble.tex}
+
+\title{\textbf{Reliable Epistemic AI Tutors for Secondary Education}\\
+\large Technical Report}
+
+\author[1]{Wolfgang Spahn}
+\author[1]{Marc Eyer}
+\affil[1]{PHBern -- University of Teacher Education Bern, Fab 8, Bern, Switzerland}
+\affil[ ]{wolfgang.spahn@phbern.ch, marc.eyer@phbern.ch}
+
+\date{February 12, 2026}
+
+\begin{document}
+
+\twocolumn[
+\maketitle
+\begin{abstract}
+The rapid integration of generative Artificial Intelligence (AI) into
+educational contexts presents both significant opportunities and
+critical risks. While Large Language Models (LLMs) can provide adaptive
+feedback and individualized support, they may also foster cognitive
+offloading, pedagogical misalignment, and unreliable tutor behavior.
+This project introduces \textbf{AIDu}, a reliability-oriented, epistemic
+AI tutoring system designed for upper secondary education. AIDu embeds
+AI dialogue within authentic, interactive learning environments and
+enforces pedagogical role stability through architectural monitoring
+mechanisms. Empirical studies with over 180 students demonstrate
+significant learning gains and evidence for reducing performance
+disparities in abstract STEM domains. The project contributes a scalable
+system architecture, a multi-agent AI design, and a formalized approach
+to epistemic AI tutoring aligned with regulatory requirements for
+high-risk educational AI systems.
+\end{abstract}
+\vspace{0.8cm}
+]
+
+\section{Introduction}\label{introduction}
+
+Generative AI has rapidly become embedded in everyday learning
+practices. By 2025, a majority of adolescents reported using AI tools
+regularly for academic purposes \citep{tbd}. Yet the empirical
+picture remains mixed. Meta-analyses suggest that AI-supported learning
+can substantially improve performance \citep{tbd}. At the same time,
+experimental evidence on cognitive load and engagement points to
+plausible downsides: learners may offload essential sense-making
+processes to the system, accept outputs uncritically, and reduce
+opportunities for internal knowledge construction and durable
+understanding
+\citep{kosmyna2025brainchatgptaccumulationcognitive,giannakos2024promise,stadler2024cognitive}.
+
+To mitigate these risks, we argue for educational AI systems that do not
+merely provide help, but also \emph{reduce the student's burden of
+safeguarding the interaction itself}---for example, by preventing
+tutoring-role drift, limiting exposure to hallucinations, and handling
+failures in ways that preserve productive learning. General-purpose
+conversational agents are not engineered to operate as reliable
+pedagogical partners\citep{bang2023education}. They may hallucinate,
+shift roles unpredictably, disclose complete solutions prematurely, or
+violate basic instructional principles\citep{gan2024llmedu}
+\citep{kazemitabaar2024codeaid}. Unlike expert users, secondary
+school students cannot be expected to continuously evaluate epistemic
+quality, detect subtle errors, or enforce a pedagogically appropriate
+framing of the interaction.
+
+Traditional Intelligent Tutoring Systems (ITS) have demonstrated robust
+learning gains\citep{anderson1995cognitive}, but often depend on
+predefined solution paths and tightly structured domains. While this
+supports efficient mastery of well-specified procedures, it can
+constrain learner autonomy and may not align with competence-oriented
+goals that emphasize transferable skills, strategy use, and
+contextualized judgment.
+
+Against this backdrop, this project investigates the following research
+question:
+
+\textbf{How must an AI-based tutoring system be designed to reliably
+support competence-oriented learning while maintaining pedagogical role
+stability and contextual integrity?}
+
+\section{Conceptual Foundation: Epistemic AI
+Tutoring}\label{conceptual-foundation-epistemic-ai-tutoring}
+
+AIDu is grounded in the concept of \emph{epistemic tutoring}. In
+contrast to assessing, solving, explaining, or strictly Socratic
+behaviors, epistemic tutoring emphasizes exploration, hypothesis
+generation, reflective feedback, and structural support without
+prescribing a fixed solution path.
+
+The design aligns with theories of authentic instruction and competence
+development\citep{bransford2000howpeoplelearn},
+\citep{newmann1996authentic}, \citep{wood1976scaffolding}.
+Learning tasks are structured to require knowledge construction,
+higher-order thinking, and transfer beyond classroom contexts. Rather
+than reducing cognitive effort, AI support is intended to scaffold
+productive struggle. Learners encounter underspecified problems, model
+conflicts, and representation mismatches that require active reasoning.
+
+In this framework, AI serves not as a solution provider but as a
+structured companion in inquiry processes.
+
+\section{System Architecture}\label{system-architecture}
+
+AIDu is implemented as a modular platform integrating frontend
+interfaces, interactive learning environments, backend infrastructure, a
+multi-agent AI subsystem, and a monitoring layer for quality assurance.
+The architecture is explicitly designed to stabilize pedagogical
+behavior and ensure compliance with high-risk AI requirements under the
+EU AI Act.
+
+\subsection{Frontend Interfaces}\label{frontend-interfaces}
+
+The browser-based frontend constitutes the primary interaction layer for
+learners and teachers. The learner interface enables engagement with
+structured learning scenarios, dialogic interaction with the AI tutor,
+and exploration of interactive simulations. A functional prototype
+allows students to independently work on tasks while receiving real-time
+AI feedback. Ongoing developments include a digital whiteboard for
+structured solution visualization, formal input tools for mathematical
+and chemical expressions, and enhanced coupling between dialogue and
+embedded simulations.
+
+The teacher interface provides real-time monitoring of learner activity
+and task allocation. Current functionality includes visualization of
+system usage states and targeted assignment of learning objectives. A
+graphical scenario configuration environment is under development,
+enabling teachers to design collaborative tasks and instructional
+experiments. Long-term goals include advanced learning analytics
+dashboards and individualized trajectory monitoring.
+
+\subsection{Interactive Learning
+Spaces}\label{interactive-learning-spaces}
+
+A central element of AIDu is the integration of simulations and digital
+experiential environments (``Erfahrungsräume''). These applets enable
+active experimentation in domains such as computer science, physics,
+mathematics, and foreign language learning. By embedding AI dialogue
+within structured simulation contexts, domain boundaries become explicit
+and hallucination risks are reduced. The simulations provide dynamic
+state information that the AI tutor can reference, ensuring contextual
+grounding. Future developments focus on adaptive feedback integration
+and personalized learning pathways.
+
+\subsection{Backend Infrastructure}\label{backend-infrastructure}
+
+The backend functions as the coordinating infrastructure of the system.
+It manages user authentication, stores learning modules and dialogue
+logs, and mediates real-time communication between frontend and AI
+components. A scalable reactive architecture supports bidirectional
+communication and modular expansion. Administrative management currently
+operates via command-line tools; a graphical interface and REST API are
+in development to facilitate browser-based configuration. Integration of
+over 120 established MINT simulations is supported through an extensible
+data model. Planned extensions include support for cooperative learning
+scenarios and structured group work.
+
+\subsection{Multi-Agent AI Subsystem}\label{multi-agent-ai-subsystem}
+
+The AI subsystem represents the core innovation of AIDu. It consists of
+specialized agents built on LLM architectures. Implemented agents
+include an evaluation agent supporting analytical reasoning, a tutoring
+agent for STEM domains, a language agent for conversational practice, an
+exploration agent for interdisciplinary inquiry, a student simulation
+agent for testing, and an experiential space agent coordinating
+simulation-based learning.
+
+Agents interact through structured tool calls, enabling them to update
+simulation states, annotate the digital whiteboard, extract mathematical
+expressions, perform concept analysis, or invoke helper agents.
+Mathematical inputs can be formally validated using a Python-based
+computer algebra system. For non-mathematical domains, automatic concept
+graph generation models relationships among domain concepts and supports
+structured feedback.
+
+Currently, interaction flows are partially hard-coded. A dynamic AI
+orchestrator is under development to select and combine agents
+adaptively based on context and learner behavior. This orchestration
+layer will enhance flexibility while preserving pedagogical control.
+
+\subsection{Monitoring and Quality
+Assurance}\label{monitoring-and-quality-assurance}
+
+A defining characteristic of AIDu is real-time dialogue monitoring. Each
+AI response is evaluated with respect to intended teaching behavior,
+session objectives, and domain constraints. Speech-act-based analysis
+allows detection of role violations, premature solution delivery, or
+misinformation. This reliability layer is essential, as repeated
+dialogue simulations demonstrate that identical prompts may otherwise
+lead to divergent pedagogical trajectories.
+
+Evaluation procedures include simulated learner testing, mathematical
+solution validation, and structured discourse analysis. Planned
+extensions involve live dialogue analytics providing teachers with
+summaries of interaction depth, tutor behavior patterns, and learner
+engagement metrics.
+
+\section{Empirical Evaluation}\label{empirical-evaluation}
+
+The system has been evaluated in multiple studies.
+
+An exploratory study with eight students investigated usability and
+dialogue patterns. Results revealed substantial variability in
+interaction quality and informed refinements in monitoring mechanisms.
+
+A larger study involving 117 students included structured usability
+polling \citep{BuchnerSpahnEyer2026AIDuSGFB}
+\citep{Langenegger2025LernenDurchKI} and qualitative analysis of 38
+student--AI dialogues. Embedding dialogue within authentic environments
+significantly reduced tutor role drift and stabilized epistemic support.
+
+A controlled pretest--posttest study with 84 secondary school students
+examined learning outcomes in a networking module focused on diagnosing
+a malfunctioning printer. Results showed significant learning gains (d =
+0.90). Notably, initial gender performance differences observed in the
+pretest disappeared in the posttest, with particularly strong gains
+among female students (d = 1.10). These findings suggest that epistemic
+AI tutoring embedded in structured environments can both enhance
+learning and contribute to reducing disparities in abstract STEM
+domains.
+
+Across studies, interaction patterns varied considerably. Some students
+used the tutor reflectively for feedback, while others attempted to
+extract full solutions. Without architectural safeguards, such pressures
+risk undermining epistemic integrity. The monitoring layer proved
+essential for maintaining pedagogical alignment.
+
+\section{Contribution and Outlook}\label{contribution-and-outlook}
+
+The AIDu project contributes a formalized model of epistemic AI
+tutoring, a reliability-oriented system architecture, and empirical
+evidence supporting competence-oriented AI integration in secondary
+education. It demonstrates that embedding AI dialogue in authentic
+contexts combined with real-time monitoring can stabilize tutor roles
+and support reflective learning processes.
+
+The findings underscore that educational impact depends less on raw
+model capability than on architectural design. Reliable AI tutors
+require explicit pedagogical framing, contextual grounding, dynamic
+orchestration, and systematic quality assurance.
+
+Future work will refine adaptive orchestration mechanisms, extend
+longitudinal evaluation, and explore scalable deployment in diverse
+educational settings. Further research will also investigate cooperative
+AI-supported learning and automated real-time dialogue analytics.
+
+\section{Conclusion}\label{conclusion}
+
+AI integration in education is no longer optional. The decisive question
+is whether systems are designed to promote durable understanding and
+higher-order competencies. AIDu demonstrates that epistemic AI
+tutoring---embedded in authentic learning environments and stabilized
+through architectural monitoring---can support reflective, self-directed
+learning while maintaining pedagogical integrity.
+
+Design, not model size, determines educational reliability.
+
+
+\input{EU_AI_ACT.tex}
+
+% \clearpage
+% \typeout{=== INPUTTING paper.bbl NOW ===}
+% \input{paper.bbl}
+
+\bibliographystyle{plainnat}
+\bibliography{literature}
+
+\end{document}

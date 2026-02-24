@@ -1,0 +1,147 @@
+% =================================================
+% arXiv-hardened preamble (pdfLaTeX + natbib + .bbl)
+% Technical report, two-column, first-page status bar,
+% footer disclaimer, safe package order
+% =================================================
+
+
+\usepackage{authblk}
+\renewcommand\Authfont{\large}
+\renewcommand\Affilfont{\normalsize}
+
+% -------------------------
+% Encoding & Fonts (pdfLaTeX)
+% -------------------------
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{textcomp}
+
+% -------------------------
+% Page layout (technical report density)
+% -------------------------
+\usepackage[a4paper,margin=1.8cm]{geometry}
+\setlength{\columnsep}{0.65cm}
+\setlength{\emergencystretch}{3em}
+
+% -------------------------
+% Spacing
+% -------------------------
+\usepackage{setspace}
+\setstretch{1}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{3pt}
+
+% -------------------------
+% Section spacing (optional; ok on arXiv)
+% -------------------------
+\usepackage{titlesec}
+\titlespacing*{\section}{0pt}{10pt}{6pt}
+\titlespacing*{\subsection}{0pt}{8pt}{4pt}
+
+% -------------------------
+% Math
+% -------------------------
+\usepackage{amsmath,amssymb}
+
+% -------------------------
+% Graphics, captions, floats
+% -------------------------
+\usepackage{graphicx}
+\usepackage{xcolor}
+
+% NOTE: Using [H] everywhere in two-column can be painful.
+% Keeping float package is fine, but use sparingly.
+\usepackage{float}
+
+\usepackage{caption}
+\usepackage{subcaption}
+\captionsetup[figure]{labelfont=bf, labelsep=colon}
+\captionsetup[table]{labelfont=bf}
+% Optional: comment this out if floats get stuck
+\floatplacement{figure}{H}
+
+% -------------------------
+% Tables
+% -------------------------
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{longtable}
+\renewcommand{\arraystretch}{1.2}
+% NOTE: longtable is not great in twocolumn. Prefer table* / tabular if possible.
+
+% -------------------------
+% Icons
+% -------------------------
+\usepackage{pifont}
+\newcommand{\iconbox}[1]{\hspace*{1.6cm}\makebox[1.4em][c]{#1}}
+\newcommand{\OK}{\iconbox{\textcolor{green!60!black}{\ding{51}}}}
+\newcommand{\WN}{\iconbox{\textcolor{orange!80!black}{\ding{115}}}}
+\newcommand{\NK}{\iconbox{\textcolor{red!80!black}{\ding{55}}}}
+
+% -------------------------
+% Editorial box
+% -------------------------
+\usepackage[most]{tcolorbox}
+\newtcolorbox{editorialbox}{
+  colback=gray!8,
+  colframe=gray!50,
+  boxrule=0.4pt,
+  arc=2pt,
+  left=5pt,
+  right=5pt,
+  top=3pt,
+  bottom=3pt
+}
+
+% -------------------------
+% Footer disclaimer + page number
+% -------------------------
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[C]{\footnotesize Working Paper -- Not Peer Reviewed}
+\fancyfoot[R]{\thepage}
+\renewcommand{\headrulewidth}{0pt}
+
+% -------------------------
+% Bibliography (natbib; BibTeX; .bbl upload method)
+% -------------------------
+\usepackage[numbers,sort&compress]{natbib}
+
+% -------------------------
+% Hyperlinks (load late)
+% -------------------------
+\usepackage[hidelinks]{hyperref}
+\usepackage{bookmark}  % ok after hyperref
+\usepackage{xurl}      % url line breaks
+\urlstyle{same}
+
+% -------------------------
+% PREPRINT status bar (first page only)
+% Put this AFTER hyperref so overlays don't get disturbed by link anchors.
+% -------------------------
+% \usepackage{tikz}
+% \usepackage{eso-pic}
+
+% \newcommand{\statuslabel}{PREPRINT}
+
+% % Draw only on the first page (robust approach):
+% \AddToShipoutPictureFG{%
+%   \AtPageUpperLeft{%
+%     \ifnum\value{page}=1\relax
+%       \begin{tikzpicture}[remember picture,overlay]
+%         \fill[gray!15]
+%           (current page.north west)
+%           rectangle
+%           ([xshift=1.05cm]current page.south west);
+
+%         \node[rotate=90,anchor=south,
+%               gray!60,
+%               font=\sffamily\bfseries\footnotesize]
+%           at ([xshift=0.525cm,yshift=-0.8cm]current page.north west)
+%           {\statuslabel};
+%       \end{tikzpicture}%
+%     \fi
+%   }%
+% }
